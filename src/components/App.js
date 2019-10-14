@@ -9,17 +9,16 @@ class App extends React.Component {
 
     this.state = {
       pets: [],
-      filters: {
-        type: 'all'
-      }
+      filter: 'all'
+  
     };
   }
 
   fetchPets = () => {
     let endpoint = '/api/pets';
 
-    if (this.state.filters.type !== 'all') {
-      endpoint += `?type=${this.state.filters.type}`;
+    if (this.state.filter !== 'all') {
+      endpoint += `?type=${this.state.filter}`;
     }
 
     fetch(endpoint)
@@ -28,7 +27,7 @@ class App extends React.Component {
   };
 
   onChangeType = (event) => {
-    this.setState({ filters: { ...this.state.filters, type: event.target.value} });
+    this.setState({ filter: event.target.value });
   };
 
   onAdoptPet = petId => {
